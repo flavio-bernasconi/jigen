@@ -6,6 +6,7 @@ import { List } from "./components/List";
 import { csv } from "d3";
 import { SetNumber } from "./components/SetNumber";
 import { Results } from "./components/Results";
+import { Search } from "./components/Search";
 
 const state = State.create({});
 
@@ -14,7 +15,7 @@ window.STATE = state;
 export const App = observer(function App() {
   const { stepOne, stepTwo, stepThree, setDataset } = state;
   const [filter, setFilter] = useState("");
-  csv("dataset.csv").then(res => {
+  csv("dataset.csv").then((res) => {
     setDataset(res, filter);
   });
 
@@ -23,7 +24,7 @@ export const App = observer(function App() {
       <div>
         {stepOne && (
           <>
-            <input type="text" onChange={e => setFilter(e.target.value)} />
+            <Search />
             <List />
           </>
         )}
