@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import { Provider, observer } from "mobx-react";
+import { State } from "./state";
+import { List } from "./components/List";
+import { csv } from "d3";
+import { SetNumber } from "./components/SetNumber";
+import { Results } from "./components/Results";
 
-function App() {
+const state = State.create({});
+
+window.STATE = state;
+
+export const App = observer(function App() {
+  const { stepOne, stepTwo, stepThree, setDataset } = state;
+  const [filter, setFilter] = useState("");
+  csv("dataset.csv").then(res => {
+    setDataset(res, filter);
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider state={state}>
+      <div>
+        {stepOne && (
+          <>
+            <input type="text" onChange={e => setFilter(e.target.value)} />
+            <List />
+          </>
+        )}
+      </div>
+      <div>{stepTwo && <SetNumber />}</div>
+      <div>{stepThree && <Results />}</div>
+    </Provider>
   );
-}
-
-export default App;
+});
