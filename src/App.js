@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import { Provider, observer } from "mobx-react";
 import { State } from "./state";
@@ -14,9 +14,8 @@ window.STATE = state;
 
 export const App = observer(function App() {
   const { stepOne, stepTwo, stepThree, setDataset } = state;
-  const [filter, setFilter] = useState("");
   csv("dataset.csv").then((res) => {
-    setDataset(res, filter);
+    setDataset(res);
   });
 
   return (

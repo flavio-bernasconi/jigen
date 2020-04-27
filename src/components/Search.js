@@ -3,10 +3,10 @@ import { observer, inject } from "mobx-react";
 
 export const Search = inject("state")(
   observer(function Search({ state }) {
-    const { setFilter } = state;
+    const { filterDataset } = state;
     return (
-      <div>
-        <input type="text" onChange={(e) => setFilter(e.target.value)} />
+      <div className="search-section">
+        <input type="text" onChange={(e) => filterDataset(e.target.value)} />
       </div>
     );
   })

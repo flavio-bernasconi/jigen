@@ -8,14 +8,11 @@ export const State = t
     numberSelected: t.optional(t.number, 0),
     stepOne: t.optional(t.boolean, true),
     stepTwo: t.optional(t.boolean, false),
-    stepThree: t.optional(t.boolean, false)
+    stepThree: t.optional(t.boolean, false),
   })
-  .actions(self => ({
-    setDataset(value, filter) {
-      const filtered = value.filter(e =>
-        e.name.toLowerCase().startsWith(filter)
-      );
-      self.dataset = filtered;
+  .actions((self) => ({
+    setDataset(value) {
+      self.dataset = value;
     },
     getPrice(price) {
       self.priceSelected = Number(price);
@@ -26,14 +23,21 @@ export const State = t
     },
     setNumber(num) {
       self.numberSelected = Number(num);
-    }
+    },
+    filterDataset(filter) {
+      const filtered = self.dataset.filter((e) =>
+        e.name.toLowerCase().startsWith(filter)
+      );
+
+      self.dataset = filtered;
+    },
   }))
-  .views(self => ({
+  .views((self) => ({
     get amounts() {
       const day = Number(
         ((self.priceSelected / 20) * self.numberSelected).toFixed(2)
       );
-      const multi = n => Number((self.priceSelected * n).toFixed(2));
+      const multi = (n) => Number((self.priceSelected * n).toFixed(2));
       return { day, week: multi(7), month: multi(30), year: multi(365) };
-    }
+    },
   }));
