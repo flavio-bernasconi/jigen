@@ -101,7 +101,8 @@ body {
   border-radius: 50px;
   background-color: transparent;
 }
-input:focus {
+input:focus,
+button:focus {
   outline: none;
 }
 
@@ -117,25 +118,78 @@ input:focus {
   background-color: rgb(219, 219, 219);
   width: 50%;
   height: 100vh;
+  box-sizing: content-box;
+  position: relative;
 }
 .half .flex {
   display: flex;
   flex-wrap: wrap;
-  widows: 100%;
+  width: 100%;
+  height: 100vh;
+  align-content: space-around;
+  align-items: center;
+  align-content: flex-end;
+}
+.btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  width: 50%;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+.btn {
+  background-color: transparent;
+  height: 50px;
+  width: 50px;
+  border-radius: 50px;
+  color: rgb(195, 195, 195);
+  border: solid 1px rgb(195, 195, 195);
+  margin-right: 40px;
+  font-size: 2rem;
+}
+.input-number {
+  background-color: transparent;
+  border: none;
+  font-size: 5rem;
+  height: 200px;
+  width: 150px;
+  margin-right: 40px;
 }
 
 .select-section .container:hover {
   cursor: default;
 }
-.circle {
+.rect {
   width: 50px;
   height: 50px;
+  transition: 1s;
+  margin: 0;
+  border: solid 2px white;
   border-radius: 50px;
-  background-color: white;
-  margin: 30px;
+  transform: scale(0.5);
+  position: absolute;
 }
-.selected {
-  background-color: blue;
+
+.btn-back {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+}
+.title {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  font-size: 4rem;
+  font-weight: 900;
+  color: white;
+}
+.hide {
+  opacity: 0;
+}
+.show {
+  opacity: 1;
+  top: 50%;
 }
 
 @media only screen and (min-width: 2400px) {
@@ -165,7 +219,46 @@ input:focus {
 }
 
 @media only screen and (max-width: 450px) {
+  body {
+    overflow-x: hidden;
+  }
   .masonry {
-    column-count: 1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .half {
+    width: 100%;
+    height: 50vh;
+  }
+  .flex {
+    height: 50vh;
+  }
+  .select-section {
+    height: auto;
+  }
+  .title {
+    font-size: 3.3rem;
+  }
+  .btn-group {
+    width: 100%;
+    height: 60vh;
+  }
+  .show {
+    top: 20%;
+  }
+  .fix-height {
+    height: 100vh;
+    overflow: hidden;
+  }
+  .input-number {
+    width: 80px;
+    font-size: 4rem;
+  }
+
+  .rect {
+    width: 150px;
+    height: 150px;
+    border-radius: 150px;
   }
 }

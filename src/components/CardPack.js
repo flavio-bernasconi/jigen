@@ -1,7 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { observer, inject } from "mobx-react";
-
 var tinycolor = require("tinycolor2");
 
 const container = {
@@ -11,6 +10,7 @@ const container = {
     scale: 1,
     transition: {
       when: "beforeChildren",
+      staggerChildren: 0.1,
     },
   },
 };
@@ -25,12 +25,20 @@ const randomColor = () => {
 
 export const CardPack = inject("state")(
   observer(function CardPack({ state, info }) {
-    const { getPrice, setCurrentStep } = state;
-    const selecting = (price, e) => {
-      getPrice(price);
+    const { getPrice, setCurrentStep, setColor, setName } = state;
+    const style = {
+      background: `linear-gradient(${randomDeg(360)}deg, 
+    ${tinycolor(randomColor()).toString("rgb")} 50%, 
+    ${tinycolor(currentColor).spin(20).toString("rgb")} 50%)`,
+    };
+
+    const selecting = (info, e) => {
+      getPrice(info.price);
+      setColor([style]);
+      setName(info.name);
       setTimeout(() => {
         setCurrentStep("stepTwo", "stepOne");
-      }, 600);
+      }, 250);
     };
 
     return (
@@ -40,13 +48,8 @@ export const CardPack = inject("state")(
           initial="hidden"
           animate="visible"
           variants={container}
-          onClick={(e) => selecting(info.price, e)}
-          style={{
-            background: `linear-gradient(${randomDeg(80)}deg, 
-          ${tinycolor(randomColor()).toString("rgb")} 50%, 
-          ${tinycolor(currentColor).spin(18).toString("rgb")} 50%)`,
-          }}
-          whileHover={{ scale: 1.1 }}
+          onClick={(e) => selecting(info, e)}
+          style={style}
           whileTap={{ scale: 0.9 }}
         >
           {pack.map(() => (

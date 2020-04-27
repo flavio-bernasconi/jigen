@@ -3,12 +3,14 @@ import { types as t } from "mobx-state-tree";
 export const State = t
   .model("State", {
     filter: t.optional(t.string, ""),
+    name: t.optional(t.string, ""),
     dataset: t.optional(t.array(t.frozen()), []),
     priceSelected: t.optional(t.number, 0),
-    numberSelected: t.optional(t.number, 0),
+    numberSelected: t.optional(t.number, 1),
     stepOne: t.optional(t.boolean, true),
     stepTwo: t.optional(t.boolean, false),
     stepThree: t.optional(t.boolean, false),
+    colorSelected: t.optional(t.array(t.frozen()), []),
   })
   .actions((self) => ({
     setDataset(value) {
@@ -34,6 +36,12 @@ export const State = t
     },
     filterDataset(filter) {
       self.filter = filter;
+    },
+    setColor(color) {
+      self.colorSelected = color;
+    },
+    setName(name) {
+      self.nameSelected = name;
     },
   }))
   .views((self) => ({

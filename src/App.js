@@ -19,6 +19,7 @@ export const App = observer(function App() {
   useEffect(() => {
     csv("dataset.csv").then((res) => {
       setDataset(res);
+      console.log(res);
     });
   }, [filter, setDataset]);
 
@@ -32,7 +33,7 @@ export const App = observer(function App() {
           </>
         )}
       </div>
-      <div>
+      <div className="fix-height">
         {stepTwo && (
           <>
             <SetNumber />

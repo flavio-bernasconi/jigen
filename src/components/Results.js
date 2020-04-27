@@ -8,7 +8,10 @@ export const Results = inject("state")(
 
     return (
       <div>
-        <button onClick={() => setCurrentStep("stepTwo", "stepTwo")}>
+        <button
+          className="btn-back "
+          onClick={() => setCurrentStep("stepTwo", "stepThree")}
+        >
           BACK
         </button>
         <h1>{amounts.day}</h1>
