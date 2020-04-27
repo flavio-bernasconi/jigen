@@ -8,6 +8,9 @@ export const Results = inject("state")(
 
     return (
       <div>
+        <button onClick={() => setCurrentStep("stepTwo", "stepTwo")}>
+          BACK
+        </button>
         <h1>{amounts.day}</h1>
         <h1>{amounts.week}</h1>
         <h1>{amounts.month}</h1>

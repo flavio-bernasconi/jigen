@@ -23,9 +23,35 @@ body {
   width: 90%;
   margin: auto;
 }
+/* .masonry {
+  column-count: 6;
+  column-gap: 1em;
+  grid-auto-flow: row;
+} */
 .pack {
   display: inline-block;
 }
+
+.masonry {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  grid-gap: 10px;
+  grid-auto-rows: minmax(180px, auto);
+  grid-auto-flow: dense;
+  padding: 10px;
+}
+
+.container-empty {
+  display: inline-block;
+  width: 160px;
+  height: 160px;
+  margin: 10px;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: rgb(235, 235, 235);
+  box-shadow: inset 3px 4px 20px rgb(195, 195, 195);
+}
+
 .container {
   width: 160px;
   margin: 10px;
@@ -38,6 +64,9 @@ body {
   border-radius: 10px;
   align-content: flex-start;
   color: white;
+}
+.container:hover {
+  cursor: pointer;
 }
 
 .item {
@@ -54,30 +83,62 @@ body {
   justify-content: space-between;
 }
 
-.container-empty {
-  width: 160px;
-  height: 160px;
-  margin: 10px;
-  overflow: hidden;
-  list-style: none;
-  padding: 15px;
-  border-radius: 10px;
-  align-content: flex-start;
-  background-color: rgb(235, 235, 235);
-  box-shadow: inset 3px 4px 20px rgb(195, 195, 195);
-}
-
 .search-section {
   height: 50vh;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.search-input {
+  width: 75%;
+  height: 50px;
+  border: solid 1px rgb(211, 211, 211);
+  font-size: 2rem;
+  padding-left: 30px;
+  max-width: 500px;
+  border-radius: 50px;
+  background-color: transparent;
+}
+input:focus {
+  outline: none;
 }
 
-.masonry {
-  column-count: 6;
-  column-gap: 1em;
-  grid-auto-flow: row;
+.select-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.half {
+  background-color: rgb(219, 219, 219);
+  width: 50%;
+  height: 100vh;
+}
+.half .flex {
+  display: flex;
+  flex-wrap: wrap;
+  widows: 100%;
 }
 
-@media only screen and (min-width: 240px) {
+.select-section .container:hover {
+  cursor: default;
+}
+.circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  background-color: white;
+  margin: 30px;
+}
+.selected {
+  background-color: blue;
+}
+
+@media only screen and (min-width: 2400px) {
   .masonry {
     column-count: 6;
   }

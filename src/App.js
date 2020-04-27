@@ -7,16 +7,20 @@ import { csv } from "d3";
 import { SetNumber } from "./components/SetNumber";
 import { Results } from "./components/Results";
 import { Search } from "./components/Search";
+import { CardPack } from "./components/CardPack";
 
 const state = State.create({});
 
 window.STATE = state;
 
 export const App = observer(function App() {
-  const { stepOne, stepTwo, stepThree, setDataset } = state;
-  csv("dataset.csv").then((res) => {
-    setDataset(res);
-  });
+  const { stepOne, stepTwo, stepThree, setDataset, filter } = state;
+
+  useEffect(() => {
+    csv("dataset.csv").then((res) => {
+      setDataset(res);
+    });
+  }, [filter, setDataset]);
 
   return (
     <Provider state={state}>
@@ -28,7 +32,13 @@ export const App = observer(function App() {
           </>
         )}
       </div>
-      <div>{stepTwo && <SetNumber />}</div>
+      <div>
+        {stepTwo && (
+          <>
+            <SetNumber />
+          </>
+        )}
+      </div>
       <div>{stepThree && <Results />}</div>
     </Provider>
   );

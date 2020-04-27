@@ -2,7 +2,7 @@ import { types as t } from "mobx-state-tree";
 
 export const State = t
   .model("State", {
-    searchedWords: t.optional(t.string, ""),
+    filter: t.optional(t.string, ""),
     dataset: t.optional(t.array(t.frozen()), []),
     priceSelected: t.optional(t.number, 0),
     numberSelected: t.optional(t.number, 0),
@@ -12,7 +12,15 @@ export const State = t
   })
   .actions((self) => ({
     setDataset(value) {
-      self.dataset = value;
+      if (self.filter !== "") {
+        const clone = value.slice();
+        const filtered = clone.filter((e) =>
+          e.name.toLowerCase().startsWith(self.filter)
+        );
+        self.dataset = filtered;
+      } else {
+        self.dataset = value;
+      }
     },
     getPrice(price) {
       self.priceSelected = Number(price);
@@ -25,11 +33,7 @@ export const State = t
       self.numberSelected = Number(num);
     },
     filterDataset(filter) {
-      const filtered = self.dataset.filter((e) =>
-        e.name.toLowerCase().startsWith(filter)
-      );
-
-      self.dataset = filtered;
+      self.filter = filter;
     },
   }))
   .views((self) => ({
@@ -37,7 +41,10 @@ export const State = t
       const day = Number(
         ((self.priceSelected / 20) * self.numberSelected).toFixed(2)
       );
-      const multi = (n) => Number((self.priceSelected * n).toFixed(2));
+      const multi = (n) => Number((day * n).toFixed(2));
+
+      console.log(multi);
+
       return { day, week: multi(7), month: multi(30), year: multi(365) };
     },
   }));
