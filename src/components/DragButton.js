@@ -17,7 +17,7 @@ export const DragButton = (props) => {
         drag
         dragConstraints={constraintsRef}
         onDrag={(event, info) => {
-          if (info.point.y < -180) {
+          if (info.point.y < -160) {
             setTimeout(() => {
               props.setCurrentStep("stepThree", "stepTwo");
             }, 200);

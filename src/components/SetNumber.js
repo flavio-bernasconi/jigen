@@ -88,6 +88,25 @@ export const SetNumber = inject("state")(
               fun={() => setNumber(numberSelected + 1)}
             />
           </div>
+          <div className="pack-layout">
+            <div style={{ position: "relative" }}>
+              {[1, 1, 1, 1, 1].map((_, i) => {
+                return (
+                  <>
+                    <div
+                      className="ciga-top"
+                      style={{ left: `${i * 112}px` }}
+                    />
+                    <div
+                      className="ciga-white"
+                      style={{ left: `${i * 112}px` }}
+                    />
+                  </>
+                );
+              })}
+            </div>
+          </div>
+
           <DragButton setCurrentStep={setCurrentStep} />
           <div className="set">
             <Button
