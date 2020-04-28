@@ -27,6 +27,8 @@ const slideIn = {
   },
 };
 
+document.body.style.overflow = "hidden";
+
 const height = () =>
   window.innerWidth > 700 ? window.innerHeight - 50 : window.innerHeight - 500;
 const width = () =>
@@ -43,6 +45,7 @@ export const SetNumber = inject("state")(
       colorSelected,
       nameSelected,
       filterDataset,
+      priceSelected,
     } = state;
     const pack = new Array(numberSelected).fill(0);
 
@@ -90,16 +93,21 @@ export const SetNumber = inject("state")(
           </div>
           <div className="pack-layout">
             <div style={{ position: "relative" }}>
-              {[1, 1, 1, 1, 1].map((_, i) => {
+              {[1, 1, 1, 1, 1, 1, 1].map((_, i) => {
+                let distance = 112;
+
+                if (window.innerWidth < 700) {
+                  distance = 70;
+                }
                 return (
                   <>
                     <div
                       className="ciga-top"
-                      style={{ left: `${i * 112}px` }}
+                      style={{ left: `${i * distance}px` }}
                     />
                     <div
                       className="ciga-white"
-                      style={{ left: `${i * 112}px` }}
+                      style={{ left: `${i * distance}px` }}
                     />
                   </>
                 );
@@ -118,7 +126,11 @@ export const SetNumber = inject("state")(
           </div>
         </div>
         <div className="half">
-          <h1 className="title">{nameSelected}</h1>
+          <div className="title">
+            <h1>{nameSelected}</h1>
+            <h1>{priceSelected}</h1>
+          </div>
+
           <h1 className={`title ${numberSelected > 20 ? "show" : "hide"}`}>
             you better quit now
           </h1>

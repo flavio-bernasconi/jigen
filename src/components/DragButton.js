@@ -7,8 +7,6 @@ const lines = new Array(50).fill(0);
 export const DragButton = (props) => {
   const constraintsRef = useRef(null);
 
-  document.body.style.overflow = "hidden";
-
   return (
     <div className="example-container">
       <motion.div className="drag-area" ref={constraintsRef} />

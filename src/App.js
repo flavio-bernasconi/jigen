@@ -34,6 +34,8 @@ export const App = observer(function App() {
     });
   }, [filter, setDataset]);
 
+  document.body.style.overflow = "scroll";
+
   return (
     <Provider state={state}>
       <motion.div initial="hidden" animate="visible" variants={slideIn}>

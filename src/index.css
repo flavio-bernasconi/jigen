@@ -223,10 +223,11 @@ button:focus {
   position: absolute;
   top: 30px;
   left: 30px;
-  font-size: 4rem;
+  font-size: 2rem;
   font-weight: 900;
   color: white;
 }
+
 .hide {
   opacity: 0;
 }
@@ -350,6 +351,9 @@ button:focus {
   .select-section {
     height: auto;
   }
+  .set {
+    height: 90px;
+  }
   .title {
     font-size: 3.3rem;
   }
@@ -386,8 +390,8 @@ button:focus {
   .example-container .ciga-yellow,
   .example-container .ciga,
   .ciga-top,
-  .ciga-white,
-  .line {
+  .line,
+  .pack-layout .ciga-white {
     width: 70px;
   }
   .ciga-top {
