@@ -1,6 +1,8 @@
 import React from "react";
 import { observer, inject } from "mobx-react";
 import { motion } from "framer-motion";
+import { Button } from "./Button";
+import { DragButton } from "./DragButton";
 
 const container = {
   hidden: { opacity: 1, scale: 0 },
@@ -13,8 +15,20 @@ const container = {
     },
   },
 };
+const slideIn = {
+  hidden: { x: 100, opacity: 0.3 },
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition: {
+      when: "beforeChildren",
+      staggerChildren: 0.1,
+    },
+  },
+};
+
 const height = () =>
-  window.innerWidth > 700 ? window.innerHeight - 500 : window.innerHeight - 50;
+  window.innerWidth > 700 ? window.innerHeight - 50 : window.innerHeight - 500;
 const width = () =>
   window.innerWidth > 700 ? window.innerWidth / 2 - 100 : 200;
 
@@ -28,20 +42,29 @@ export const SetNumber = inject("state")(
       numberSelected,
       colorSelected,
       nameSelected,
+      filterDataset,
     } = state;
     const pack = new Array(numberSelected).fill(0);
 
     const nextStep = () => {
-      setCurrentStep("stepThree", "stepTwo");
+      setTimeout(() => {
+        setCurrentStep("stepThree", "stepTwo");
+      }, 200);
     };
     return (
-      <div className="select-section">
+      <motion.div
+        className="select-section"
+        initial="hidden"
+        animate="visible"
+        variants={slideIn}
+      >
         <div className="btn-group">
           <button
             className="btn-back "
             onClick={() => {
               setCurrentStep("stepOne", "stepTwo");
               setNumber(1);
+              filterDataset("");
             }}
           >
             BACK
@@ -51,23 +74,24 @@ export const SetNumber = inject("state")(
             onChange={(e) => setNumber(e.target.value)}
             value={numberSelected}
             type="number"
+            min="0"
           />
-          <div>
-            <button
+          <div className="inc">
+            <Button
+              label="-"
               className="btn"
-              onClick={() => setNumber(numberSelected + 1)}
-            >
-              +
-            </button>
-            <button
+              fun={() => numberSelected > 0 && setNumber(numberSelected - 1)}
+            />
+            <Button
+              label="+"
               className="btn"
-              onClick={() => setNumber(numberSelected - 1)}
-            >
-              -
-            </button>
+              fun={() => setNumber(numberSelected + 1)}
+            />
           </div>
-
-          <button onClick={() => nextStep()}>Set</button>
+          <DragButton setCurrentStep={setCurrentStep} />
+          <div className="set">
+            <Button label="Set" className="btn-set" fun={() => nextStep()} />
+          </div>
         </div>
         <div className="half">
           <h1 className="title">{nameSelected}</h1>
@@ -94,7 +118,7 @@ export const SetNumber = inject("state")(
             ))}
           </motion.div>
         </div>
-      </div>
+      </motion.div>
     );
   })
 );

@@ -7,11 +7,23 @@ import { csv } from "d3";
 import { SetNumber } from "./components/SetNumber";
 import { Results } from "./components/Results";
 import { Search } from "./components/Search";
-import { CardPack } from "./components/CardPack";
+import { motion } from "framer-motion";
+import { Button } from "./components/Button";
 
 const state = State.create({});
 
 window.STATE = state;
+const slideIn = {
+  hidden: { x: -500, opacity: 0.3 },
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition: {
+      when: "beforeChildren",
+      staggerChildren: 0.1,
+    },
+  },
+};
 
 export const App = observer(function App() {
   const { stepOne, stepTwo, stepThree, setDataset, filter } = state;
@@ -19,28 +31,35 @@ export const App = observer(function App() {
   useEffect(() => {
     csv("dataset.csv").then((res) => {
       setDataset(res);
-      console.log(res);
     });
   }, [filter, setDataset]);
 
   return (
     <Provider state={state}>
-      <div>
+      <motion.div initial="hidden" animate="visible" variants={slideIn}>
         {stepOne && (
           <>
             <Search />
             <List />
+            <Button
+              label="top"
+              className="btn btn-top"
+              fun={() =>
+                window.scrollTo({
+                  top: 0,
+                  behavior: "smooth",
+                })
+              }
+            />
           </>
         )}
-      </div>
-      <div className="fix-height">
         {stepTwo && (
-          <>
+          <div className="fix-height">
             <SetNumber />
-          </>
+          </div>
         )}
-      </div>
-      <div>{stepThree && <Results />}</div>
+        <div>{stepThree && <Results />}</div>
+      </motion.div>
     </Provider>
   );
 });

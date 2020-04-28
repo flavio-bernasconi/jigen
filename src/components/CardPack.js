@@ -15,6 +15,14 @@ const container = {
   },
 };
 
+const item = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+  },
+};
+
 let currentColor;
 const pack = new Array(20).fill(0);
 const randomDeg = (n) => Math.round(Math.random() * n + 10);
@@ -29,7 +37,7 @@ export const CardPack = inject("state")(
     const style = {
       background: `linear-gradient(${randomDeg(360)}deg, 
     ${tinycolor(randomColor()).toString("rgb")} 50%, 
-    ${tinycolor(currentColor).spin(20).toString("rgb")} 50%)`,
+    ${tinycolor(currentColor).spin(30).toString("rgb")} 50%)`,
     };
 
     const selecting = (info, e) => {
@@ -53,11 +61,7 @@ export const CardPack = inject("state")(
           whileTap={{ scale: 0.9 }}
         >
           {pack.map(() => (
-            <motion.div
-              key={Math.random()}
-              className="item"
-              variants={container}
-            />
+            <motion.div key={Math.random()} className="item" variants={item} />
           ))}
           <div className="name-pack" key={info.name}>
             <h4>{info.name}</h4>
