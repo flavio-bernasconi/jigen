@@ -337,6 +337,11 @@ button:focus {
     border-radius: 150px;
   }
   .example-container .ciga-yellow {
-    bottom: -32vh;
+    bottom: -12vh;
+    height: 20vh;
+  }
+  .example-container .ciga-yellow,
+  .example-container .ciga {
+    width: 70px;
   }
 }
