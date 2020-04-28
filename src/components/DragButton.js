@@ -2,9 +2,12 @@ import * as React from "react";
 import { useRef } from "react";
 import { motion } from "framer-motion";
 
+const lines = new Array(50).fill(0);
+
 export const DragButton = (props) => {
   const constraintsRef = useRef(null);
-  console.log(props);
+
+  document.body.style.overflow = "hidden";
 
   return (
     <div className="example-container">
@@ -21,6 +24,11 @@ export const DragButton = (props) => {
           }
         }}
       >
+        {lines.map((_, i) => {
+          return <div className="line" style={{ top: `${i * 20}px` }} />;
+        })}
+
+        <div className="ciga-top"></div>
         <div className="ciga"></div>
       </motion.div>
     </div>

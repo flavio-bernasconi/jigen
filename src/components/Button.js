@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-export function Button({ fun, className, label }) {
+export function Button({ fun, className, label, style }) {
   console.log(fun, className, label);
 
   return (
@@ -9,6 +9,7 @@ export function Button({ fun, className, label }) {
       onClick={fun}
       className={`${className}`}
       whileTap={{ scale: 0.6 }}
+      style={style}
     >
       {label}
     </motion.button>

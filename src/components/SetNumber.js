@@ -90,12 +90,17 @@ export const SetNumber = inject("state")(
           </div>
           <DragButton setCurrentStep={setCurrentStep} />
           <div className="set">
-            <Button label="Set" className="btn-set" fun={() => nextStep()} />
+            <Button
+              label="Set"
+              className="btn-set"
+              style={colorSelected[0]}
+              fun={() => nextStep()}
+            />
           </div>
         </div>
         <div className="half">
           <h1 className="title">{nameSelected}</h1>
-          <h1 className={`title ${numberSelected > 60 ? "show" : "hide"}`}>
+          <h1 className={`title ${numberSelected > 20 ? "show" : "hide"}`}>
             you better quit now
           </h1>
 

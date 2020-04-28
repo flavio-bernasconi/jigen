@@ -116,6 +116,7 @@ button:focus {
   align-content: center;
   align-items: center;
   height: 100vh;
+  overflow: hidden;
 }
 .half {
   background-color: rgb(219, 219, 219);
@@ -176,9 +177,12 @@ button:focus {
   background-color: transparent;
   width: 150px;
   padding: 0 32px;
-  border: solid 1px rgb(195, 195, 195);
+  border: none;
   border-radius: 50px;
   height: 50px;
+  color: white;
+  font-weight: 700;
+  font-size: large;
 }
 .btn-top {
   position: fixed;
@@ -228,17 +232,19 @@ button:focus {
 }
 .show {
   opacity: 1;
-  top: 50%;
+  top: 70%;
+  font-size: 1rem;
+  font-weight: lighter;
 }
 
 .example-container .drag-area {
   opacity: 0.2;
   background: white;
   position: absolute;
-  width: 150px;
+  width: 110px;
   height: 100vh;
   border-radius: 30px;
-  left: 50px;
+  left: 40%;
 }
 .example-container .ciga-yellow {
   background-color: rgb(255, 213, 73);
@@ -247,7 +253,7 @@ button:focus {
   height: 39vh;
   position: absolute;
   bottom: -10vh;
-  left: 50px;
+  left: 40%;
 }
 .ciga-yellow:hover {
   cursor: grab;
@@ -262,6 +268,22 @@ button:focus {
   background-color: rgb(253, 253, 253);
   box-shadow: 2px 3px 15px rgb(202, 202, 202);
   height: 40vh;
+}
+.ciga-top {
+  width: 110px;
+  height: 30px;
+  position: absolute;
+  top: -12px;
+  background-color: rgb(255, 240, 199);
+  box-shadow: inset 2px 5px 10px rgb(243, 226, 178);
+  border-radius: 100%;
+}
+.line {
+  width: 110px;
+  height: 30px;
+  position: absolute;
+  border-radius: 100%;
+  border-bottom: solid 3px rgba(255, 255, 255, 0.2);
 }
 
 @media only screen and (min-width: 2400px) {
@@ -283,14 +305,7 @@ button:focus {
   }
 }
 
-/* Masonry on small screens */
-@media only screen and (max-width: 670px) {
-  .masonry {
-    column-count: 2;
-  }
-}
-
-@media only screen and (max-width: 450px) {
+@media only screen and (max-width: 700px) {
   body {
     overflow-x: hidden;
     width: 100vw;
@@ -300,6 +315,7 @@ button:focus {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    column-count: 2;
   }
   .half {
     width: 100%;
@@ -336,12 +352,21 @@ button:focus {
     height: 150px;
     border-radius: 150px;
   }
+  .example-container .drag-area {
+    left: 70%;
+  }
   .example-container .ciga-yellow {
     bottom: -12vh;
     height: 20vh;
+    left: 70%;
   }
   .example-container .ciga-yellow,
-  .example-container .ciga {
+  .example-container .ciga,
+  .ciga-top {
     width: 70px;
+  }
+  .ciga-top {
+    top: -4px;
+    height: 20px;
   }
 }
