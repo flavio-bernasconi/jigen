@@ -230,6 +230,7 @@ button:focus {
   padding: 8px 18px;
   height: 40px;
   border-radius: 40px;
+  background-color: white;
 }
 .title {
   position: absolute;
