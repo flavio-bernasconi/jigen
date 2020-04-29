@@ -69,15 +69,15 @@ export const CardPack = inject("state")(
                 className="item-2"
                 variants={item}
                 style={{ left: `${i * 27}px` }}
-                whileHover={{ y: -10 }}
-              />
-              <motion.div
-                className="bk-white"
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}
+                whileHover={{ y: -4 }}
               />
             </>
           ))}
+          <motion.div
+            className="bk-white"
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+          />
           <div className="name-pack" key={info.name}>
             <h4>{info.name}</h4>
             <p>{info.price}</p>
