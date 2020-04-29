@@ -472,6 +472,7 @@ button:focus {
   .input-number {
     font-size: 4rem;
     margin-right: 0;
+    height: 100px;
   }
 
   .rect {
@@ -511,5 +512,8 @@ button:focus {
   }
   .display-results .packs {
     margin-top: 250px;
+  }
+  .how {
+    margin-bottom: 10px;
   }
 }
