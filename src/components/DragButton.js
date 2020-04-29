@@ -14,8 +14,8 @@ export const DragButton = (props) => {
         className="ciga-yellow"
         drag
         dragConstraints={constraintsRef}
-        onDrag={(event, info) => {
-          if (info.point.y < -160) {
+        onDrag={(_, info) => {
+          if (info.point.y < -window.innerHeight / 6) {
             setTimeout(() => {
               props.setCurrentStep("stepThree", "stepTwo");
             }, 200);
@@ -23,7 +23,13 @@ export const DragButton = (props) => {
         }}
       >
         {lines.map((_, i) => {
-          return <div className="line" style={{ top: `${i * 20}px` }} />;
+          return (
+            <div
+              key={Math.random()}
+              className="line"
+              style={{ top: `${i * 20}px` }}
+            />
+          );
         })}
 
         <div className="ciga-top"></div>

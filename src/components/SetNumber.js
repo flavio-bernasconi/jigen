@@ -3,18 +3,10 @@ import { observer, inject } from "mobx-react";
 import { motion } from "framer-motion";
 import { Button } from "./Button";
 import { DragButton } from "./DragButton";
+import { BtnIncs } from "./BtnIncs";
+import { FakeCiga } from "./FakeCiga";
+import { VizCircle } from "./VizCircle";
 
-const container = {
-  hidden: { opacity: 1, scale: 0 },
-  visible: {
-    opacity: 1,
-    scale: 0.5,
-    transition: {
-      when: "beforeChildren",
-      staggerChildren: 0.1,
-    },
-  },
-};
 const slideIn = {
   hidden: { x: 100, opacity: 0.3 },
   visible: {
@@ -29,13 +21,6 @@ const slideIn = {
 
 document.body.style.overflow = "hidden";
 
-const height = () =>
-  window.innerWidth > 700 ? window.innerHeight - 50 : window.innerHeight - 500;
-const width = () =>
-  window.innerWidth > 700 ? window.innerWidth / 2 - 100 : 200;
-
-const rand = (n) => Math.random() * n;
-
 export const SetNumber = inject("state")(
   observer(function SetNumber({ state }) {
     const {
@@ -47,7 +32,6 @@ export const SetNumber = inject("state")(
       filterDataset,
       priceSelected,
     } = state;
-    const pack = new Array(numberSelected).fill(0);
 
     const nextStep = () => {
       setTimeout(() => {
@@ -62,16 +46,15 @@ export const SetNumber = inject("state")(
         variants={slideIn}
       >
         <div className="btn-group">
-          <button
-            className="btn-back "
-            onClick={() => {
+          <Button
+            label="BACK"
+            className="btn-back"
+            fun={() => {
               setCurrentStep("stepOne", "stepTwo");
               setNumber(1);
               filterDataset("");
             }}
-          >
-            BACK
-          </button>
+          />
           <input
             className="input-number"
             onChange={(e) => setNumber(e.target.value)}
@@ -80,41 +63,13 @@ export const SetNumber = inject("state")(
             min="0"
           />
           <div className="inc">
-            <Button
-              label="-"
-              className="btn"
-              fun={() => numberSelected > 0 && setNumber(numberSelected - 1)}
-            />
-            <Button
-              label="+"
-              className="btn"
-              fun={() => setNumber(numberSelected + 1)}
-            />
+            <BtnIncs />
           </div>
           <div className="pack-layout">
             <div style={{ position: "relative" }}>
-              {[1, 1, 1, 1, 1, 1, 1].map((_, i) => {
-                let distance = 112;
-
-                if (window.innerWidth < 700) {
-                  distance = 70;
-                }
-                return (
-                  <>
-                    <div
-                      className="ciga-top"
-                      style={{ left: `${i * distance}px` }}
-                    />
-                    <div
-                      className="ciga-white"
-                      style={{ left: `${i * distance}px` }}
-                    />
-                  </>
-                );
-              })}
+              <FakeCiga />
             </div>
           </div>
-
           <DragButton setCurrentStep={setCurrentStep} />
           <div className="set">
             <Button
@@ -128,12 +83,11 @@ export const SetNumber = inject("state")(
         <div className="half">
           <div className="title">
             <h1>{nameSelected}</h1>
-            <h1>{priceSelected}</h1>
+            <h1>{priceSelected.str}</h1>
           </div>
-
-          <h1 className={`title ${numberSelected > 20 ? "show" : "hide"}`}>
-            you better quit now
-          </h1>
+          {numberSelected > 20 && (
+            <h1 className={`title show `}>you better quit now</h1>
+          )}
 
           <motion.div
             className="flex"
@@ -141,17 +95,7 @@ export const SetNumber = inject("state")(
             animate="visible"
             style={colorSelected[0]}
           >
-            {pack.map((_, i) => (
-              <motion.div
-                key={Math.random()}
-                className={`rect ${i < numberSelected && "selected"}`}
-                variants={container}
-                style={{
-                  top: rand(height()),
-                  left: rand(width()),
-                }}
-              />
-            ))}
+            <VizCircle numberSelected={numberSelected} />
           </motion.div>
         </div>
       </motion.div>

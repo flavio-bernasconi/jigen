@@ -1,11 +1,18 @@
 import { types as t } from "mobx-state-tree";
 
+function addZeroes(num) {
+  // const dec = num.split(".")[1];
+  // const len = dec && dec.length > 0 && 2;
+
+  return Number(num).toFixed(2);
+}
+
 export const State = t
   .model("State", {
     filter: t.optional(t.string, ""),
     name: t.optional(t.string, ""),
     dataset: t.optional(t.array(t.frozen()), []),
-    priceSelected: t.optional(t.number, 0),
+    priceSelected: t.optional(t.frozen()),
     numberSelected: t.optional(t.number, 1),
     stepOne: t.optional(t.boolean, true),
     stepTwo: t.optional(t.boolean, false),
@@ -25,7 +32,8 @@ export const State = t
       }
     },
     getPrice(price) {
-      self.priceSelected = Number(price);
+      const x = addZeroes(price);
+      self.priceSelected = { num: Number(price), str: x };
     },
     setCurrentStep(nameStep, prevStep) {
       self[prevStep] = false;
@@ -47,12 +55,14 @@ export const State = t
   .views((self) => ({
     get amounts() {
       const day = Number(
-        ((self.priceSelected / 20) * self.numberSelected).toFixed(2)
+        ((self.priceSelected.num / 20) * self.numberSelected).toFixed(2)
       );
-      const multi = (n) => Number((day * n).toFixed(2));
+      const multi = (n) => Number(day * n).toString();
 
-      console.log(multi);
+      const week = addZeroes(multi(7));
+      const month = addZeroes(multi(30));
+      const year = addZeroes(multi(365));
 
-      return { day, week: multi(7), month: multi(30), year: multi(365) };
+      return { day, week, month, year };
     },
   }));

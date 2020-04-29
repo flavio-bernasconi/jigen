@@ -1,6 +1,7 @@
 import React from "react";
 import { observer, inject } from "mobx-react";
 import { motion } from "framer-motion";
+import { PackResult } from "./PackResult";
 
 const slideIn = {
   hidden: { x: 100, opacity: 0.3 },
@@ -13,23 +14,64 @@ const slideIn = {
     },
   },
 };
+const container = {
+  hidden: { opacity: 0, x: 100 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.6,
+    },
+  },
+};
 
 export const Results = inject("state")(
   observer(function Results({ state }) {
-    const { dataset, getPrice, setCurrentStep, priceSelected, amounts } = state;
+    const {
+      setCurrentStep,
+      amounts,
+      colorSelected,
+      nameSelected,
+      numberSelected,
+    } = state;
+    const labels = Object.keys(amounts);
 
     return (
       <motion.div initial="hidden" animate="visible" variants={slideIn}>
-        <button
-          className="btn-back "
-          onClick={() => setCurrentStep("stepTwo", "stepThree")}
-        >
-          BACK
-        </button>
-        <h1>{amounts.day}</h1>
-        <h1>{amounts.week}</h1>
-        <h1>{amounts.month}</h1>
-        <h1>{amounts.year}</h1>
+        <div className="results">
+          <button
+            className="btn-back "
+            onClick={() => setCurrentStep("stepTwo", "stepThree")}
+          >
+            BACK
+          </button>
+          <motion.div
+            className="display-results"
+            initial="hidden"
+            animate="visible"
+            variants={container}
+          >
+            <div className="intro-results">
+              <p className="big-title">
+                You smoke
+                <span>{numberSelected} </span>
+                {nameSelected} a day. So you spend:
+              </p>
+            </div>
+            <div className="packs">
+              {labels.map((period, i) => {
+                return (
+                  <PackResult
+                    period={period}
+                    color={colorSelected[0]}
+                    amount={amounts[period]}
+                    scale={i}
+                  />
+                );
+              })}
+            </div>
+          </motion.div>
+        </div>
       </motion.div>
     );
   })

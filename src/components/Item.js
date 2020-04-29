@@ -10,7 +10,7 @@ export const Item = inject("state")(
     return dataset.map((info, i) => (
       <LazyLoad
         placeholder={<div className="container-empty"></div>}
-        offset={-30}
+        offset={100}
         key={i}
         once
       >
