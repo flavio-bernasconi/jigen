@@ -16,9 +16,8 @@ const container = {
 };
 
 const item = {
-  hidden: { y: 20, opacity: 0 },
+  hidden: { opacity: 0 },
   visible: {
-    y: 0,
     opacity: 1,
   },
 };
@@ -60,8 +59,24 @@ export const CardPack = inject("state")(
           style={style}
           whileTap={{ scale: 0.9 }}
         >
-          {pack.map(() => (
+          {/* {pack.map(() => (
             <motion.div key={Math.random()} className="item" variants={item} />
+          ))} */}
+          {[1, 2, 3, 4, 5, 6, 7].map((_, i) => (
+            <>
+              <motion.div
+                key={Math.random()}
+                className="item-2"
+                variants={item}
+                style={{ left: `${i * 27}px` }}
+                whileHover={{ y: -10 }}
+              />
+              <motion.div
+                className="bk-white"
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+              />
+            </>
           ))}
           <div className="name-pack" key={info.name}>
             <h4>{info.name}</h4>
