@@ -55,6 +55,7 @@ export const SetNumber = inject("state")(
               filterDataset("");
             }}
           />
+          <p className="how">How many a day?</p>
           <input
             className="input-number"
             onChange={(e) => setNumber(e.target.value)}

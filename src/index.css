@@ -203,6 +203,8 @@ button:focus {
   height: 200px;
   width: 150px;
   text-align: center;
+  color: rgb(212, 212, 212);
+  font-weight: 700;
 }
 
 .select-section .container:hover {
@@ -378,7 +380,7 @@ button:focus {
   position: absolute;
   font-size: 5rem;
   font-weight: 900;
-  color: rgb(116, 116, 116);
+  color: rgb(212, 212, 212);
   top: 12%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -386,6 +388,14 @@ button:focus {
   text-align: center;
 }
 .search-section ::placeholder {
+  color: rgb(212, 212, 212);
+}
+
+.how {
+  width: 100%;
+  font-weight: 900;
+  font-size: 3rem;
+  text-align: center;
   color: rgb(212, 212, 212);
 }
 
@@ -412,6 +422,10 @@ button:focus {
   }
   .display-results .packs {
     margin-top: 180px;
+  }
+  .search-section ::placeholder {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
   }
 }
 
