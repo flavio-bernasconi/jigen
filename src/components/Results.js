@@ -2,6 +2,7 @@ import React from "react";
 import { observer, inject } from "mobx-react";
 import { motion } from "framer-motion";
 import { PackResult } from "./PackResult";
+import { Button } from "./Button";
 
 const slideIn = {
   hidden: { x: 100, opacity: 0.3 },
@@ -39,12 +40,13 @@ export const Results = inject("state")(
     return (
       <motion.div initial="hidden" animate="visible" variants={slideIn}>
         <div className="results">
-          <button
-            className="btn-back "
-            onClick={() => setCurrentStep("stepTwo", "stepThree")}
-          >
-            BACK
-          </button>
+          <Button
+            label="BACK"
+            className="btn-back"
+            fun={() => {
+              setCurrentStep("stepTwo", "stepThree");
+            }}
+          />
           <motion.div
             className="display-results"
             initial="hidden"

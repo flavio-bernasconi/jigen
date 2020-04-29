@@ -12,6 +12,7 @@ export const Search = inject("state")(
           className="search-input"
           type="text"
           onChange={(e) => setFilter(e.target.value)}
+          placeholder="Which cigarette do you smoke?"
         />
         <div className="boot" />
       </div>

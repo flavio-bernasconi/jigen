@@ -84,10 +84,15 @@ button:hover {
   width: 100%;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+}
+.name-pack h4 {
+  width: 100%;
+  margin-bottom: 0;
 }
 
 .search-section {
-  height: 50vh;
+  height: 30vh;
   display: flex;
   align-content: center;
   justify-content: center;
@@ -215,9 +220,14 @@ button:focus {
 }
 
 .btn-back {
-  position: absolute;
+  position: fixed;
   top: 30px;
   left: 30px;
+  border: solid 1px rgb(195, 195, 195);
+  background-color: transparent;
+  padding: 8px 18px;
+  height: 40px;
+  border-radius: 40px;
 }
 .title {
   position: absolute;
@@ -340,6 +350,7 @@ button:focus {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin-top: 130px;
 }
 .display-results .packs > div {
   color: white;
@@ -367,12 +378,15 @@ button:focus {
   position: absolute;
   font-size: 5rem;
   font-weight: 900;
-  color: rgb(223, 223, 223);
-  top: 7%;
+  color: rgb(116, 116, 116);
+  top: 12%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 90%;
   text-align: center;
+}
+.search-section ::placeholder {
+  color: rgb(212, 212, 212);
 }
 
 @media only screen and (min-width: 2400px) {
@@ -396,7 +410,7 @@ button:focus {
     top: 110px;
     font-size: 3rem;
   }
-  .packs {
+  .display-results .packs {
     margin-top: 180px;
   }
 }
@@ -481,7 +495,7 @@ button:focus {
   .display-results {
     overflow: unset;
   }
-  .packs {
+  .display-results .packs {
     margin-top: 250px;
   }
 }

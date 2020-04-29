@@ -1,8 +1,7 @@
 import React from "react";
-import { transform } from "framer-motion";
 
 export function PackResult({ color, period, amount, scale }) {
-  const incScale = 0.3 + (scale + 1) / 5;
+  const incScale = 0.5 + (scale + 1) / 5;
 
   return (
     <div
